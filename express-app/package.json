@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "ts-node-dev src/app.ts "
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/hapi__joi": "^17.1.15",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "joi": "^17.13.3",
+    "joi-date-extensions": "^1.2.0",
+    "knex": "^3.1.0",
+    "mysql2": "^3.11.4"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "@types/knex": "^0.15.2",
+    "@types/mysql": "^2.15.26",
+    "@types/node": "^22.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}

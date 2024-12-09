@@ -1,0 +1,28 @@
+{
+  "HomePage": {
+    "documents": "Documents",
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "DocumentsPage": {
+    "rendered": "Rendered: {amount}",
+    "allDocuments": "All documents: {amount}",
+    "start": "Start position: {start}",
+    "end": "End position: {end}",
+    "table": {
+      "header": {
+        "index": "#",
+        "id": "ID",
+        "state": "State",
+        "stateTime": "State Time",
+        "documentNumber": "Doc Number",
+        "documentName": "Doc Name",
+        "documentDate": "Doc Date",
+        "documentTotalAmount": "Doc Total Amount",
+        "eligibleAmount": "Eligible Amount",
+        "version": "Version",
+        "eligiblePercentage": "Eligible Percentage"
+      }
+    }
+  }
+}

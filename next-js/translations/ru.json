@@ -1,0 +1,28 @@
+{
+  "HomePage": {
+    "documents": "Доки",
+    "title": "Привет!",
+    "about": "Об этом"
+  },
+  "DocumentsPage": {
+    "rendered": "Отрендерено: {amount}",
+    "allDocuments": "Все документы: {amount}",
+    "start": "Начало: {start}",
+    "end": "Конец: {end}",
+    "table": {
+      "header": {
+        "index": "#",
+        "id": "ID",
+        "state": "State",
+        "stateTime": "State Time",
+        "documentNumber": "Doc Number",
+        "documentName": "Doc Name",
+        "documentDate": "Doc Date",
+        "documentTotalAmount": "Doc Total Amount",
+        "eligibleAmount": "Eligible Amount",
+        "version": "Version",
+        "eligiblePercentage": "Eligible Percentage"
+      }
+    }
+  }
+}

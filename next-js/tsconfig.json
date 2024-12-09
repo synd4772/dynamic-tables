@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "target": "ES2020",
+    "module": "NodeNext",
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext",
+    "jsx": "preserve", // This ensures React is not required for JSX
+    "jsxImportSource": "react", // Only necessary for React 17+ projects
+    "strict": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+, "public/workers/SortWorker.js", "../shared/types/documents.types.ts"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
