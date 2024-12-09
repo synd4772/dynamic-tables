@@ -44,10 +44,12 @@ export const TableHeader = ({ headers }: TableHeaderProps) => {
                   ? ''
                   :  !sortedBy.isAscending 
                     ? ' ↑ ':' ↓ '}
+                
             </th>
           )
         })
       }
+      <th>Managment</th>
     </tr>
   )
 };

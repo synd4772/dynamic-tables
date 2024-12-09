@@ -78,4 +78,14 @@ export class DataBaseHandler{
             return error
         }
     }
+    async deleteDocument(id:number){
+        try{
+            const results = await connection(MAIN_TABLE_NAME).where('id', id).del();
+            return results;
+        }
+        catch(error){
+            console.error(error);
+            return error
+        }
+    }
 }

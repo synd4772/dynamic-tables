@@ -1,4 +1,4 @@
-// File: C:\Projects\alex_dynamic_table\next\src\app\[locale]\documents\page.tsx
+// File: C:\Projects\alex_dynamic_table\next-js\src\app\[locale]\documents\page.tsx
 import * as entry from '../../../../../src/app/[locale]/documents/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

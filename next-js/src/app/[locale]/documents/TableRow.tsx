@@ -1,9 +1,11 @@
 'use client';
-import { forwardRef, LegacyRef } from "react";
+import { forwardRef, LegacyRef, useRef } from "react";
 import { HeaderName, Document } from "../../../../../shared/types/documents.types";
 import { TableCell } from "./TableCell";
+import { documentEventEmitter } from "@/app/lib/documentEventEmitter";
 
 export const TableRow = forwardRef(({ document, headers, index, classes = '' }: TableRowProps, ref: LegacyRef<HTMLTableRowElement> ) => {
+    const dee = useRef(documentEventEmitter);
   return (
     <tr ref={ref} key={document.id} id={`${document.id}`} className={classes}>
       {
@@ -34,6 +36,13 @@ export const TableRow = forwardRef(({ document, headers, index, classes = '' }: 
           )
         })
       }
+      <td className={"test-td"}>
+        <p onClick={()=>{
+            console.log("delete")
+            dee.current.emit("documentDelete", document.id)
+            }} className={"delete"}>x</p>
+        <p onClick={()=>{console.log("change", document.id)}} className={"change"}>w</p>
+      </td>
     </tr>
   )
 })

@@ -17,13 +17,14 @@ type LastResponse = {
 }
 
 export const useData = () => {
-    const callBack = useCallback(clientDataRequestHandler.fetchDocumentsData, [])
+    const getData = useCallback(clientDataRequestHandler.fetchDocumentsData, []);
+    const deleteRecord = useCallback(clientDataRequestHandler.deleteRecord, []);
     const [coordinates, setCoordinates] = useState<Coordinates>(INIT_COORDINATES);
 
     const [documents, setDocuments] = useState<Document[]>([]);
 
     const [sorter, setSorter] = useState<{ key: DefaultHeaders, isAscending: boolean}>( { key: 'id', isAscending: true });
-
+    const [updateFlag, setUpdateFlag] = useState(false);
     const isRendering = useRef(false);
     const isFetching = useRef(false);
     const dataAmount = useRef(-1)
@@ -57,8 +58,7 @@ export const useData = () => {
                     }
                 }
             }
-            console.time("sorting started")
-            callBack(sortRequest)
+            getData(sortRequest)
         }
     }, [sorter.isAscending, sorter.key])
 
@@ -77,9 +77,25 @@ export const useData = () => {
 
         documentEventEmitter.on('topRefTriggered', () => {
             if (!isRendering.current) {
-                setCoordinates((prev) => shiftCoordinates({  maxEnd: dataAmount.current, coordinates: prev, shift:  -1 * DOCUMENTS_RENDER_LIMIT  }));
+                setCoordinates((prev) => {return {
+                    start: prev.start,
+                    end: prev.end}
+                });
             }
         });
+
+        documentEventEmitter.on('documentDelete', (id) =>{
+            if(!isRendering.current){
+                deleteRecord(id as number);
+            }
+        })
+
+        documentEventEmitter.on("updateCurrentDocuments", ()=>{
+            if(!isRendering.current){
+                console.log(12333)
+                setUpdateFlag(prev=>!prev)
+            }
+        })
 
         documentEventEmitter.on('documentsRerendered', () => {
             isRendering.current = false;
@@ -89,6 +105,8 @@ export const useData = () => {
             documentEventEmitter.unsubscribe("bottomRefTriggered")
             documentEventEmitter.unsubscribe("topRefTriggered")
             documentEventEmitter.unsubscribe("documentsRerendered")
+            documentEventEmitter.unsubscribe("updateCurrentDocuments")
+            documentEventEmitter.unsubscribe("documentDelete")
         }
     }, []);
 
@@ -107,8 +125,25 @@ export const useData = () => {
                 }
             }
         }
-        callBack(request)
+        getData(request)
     }, [coordinates.end, coordinates.start]);
+    useEffect(()=>{
+        isRendering.current = true;
+        const request: DataRequest  = {
+            request: "fetchData",
+            body:{
+                coordinates:{
+                    start: coordinates.start,
+                    end: coordinates.end
+                },
+                sorting:{
+                    key: sorter.key,
+                    isAscending: sorter.isAscending
+                }
+            }
+        }
+        getData(request)
+    }, [updateFlag])
 
     // return {documents, documentsAmount: documentDataHandler.allData ? documentDataHandler.allData.length : null, sortDocuments, coordinates, isRendering}
     return {documents, coordinates, isRendering}

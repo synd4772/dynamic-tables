@@ -1,4 +1,4 @@
-// File: C:\Projects\alex_dynamic_table\next\src\app\api\documents\route.ts
+// File: C:\Projects\alex_dynamic_table\next-js\src\app\api\documents\route.ts
 import * as entry from '../../../../../src/app/api/documents/route.js'
 import type { NextRequest } from 'next/server.js'
 

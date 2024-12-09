@@ -100,3 +100,22 @@ tr.with-bottom-ref {
 tr.with-top-ref {
   background-color: green;
 }
+.test-td{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.test-td p{
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+}
+.test-td .delete {
+    background-color: red;
+    color: #fff
+}
+.test-td .change {
+    background-color: yellow;
+}

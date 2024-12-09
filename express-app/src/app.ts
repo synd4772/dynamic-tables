@@ -2,6 +2,7 @@ import Express from "express";
 import addDocument from "./controllers/documents.add.controller";
 import getDocuments from "./controllers/documents.controller";
 import validateDocument from "./middlewares/validateDocument.middleware";
+import deleteDocument from "./controllers/documents.delete.controller";
 import validateRequestForDocuments from "./middlewares/validateRequestForDocuments.middleware";
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, API_URL, DOCUMENTS_COUNT_LIMIT, MAIN_TABLE_NAME } from "./config/config";
 
@@ -20,6 +21,7 @@ app.use(Express.urlencoded({extended:true}));
 
 app.get('/documents/', validateRequestForDocuments ,getDocuments);
 app.post('/documents/add/', validateDocument, addDocument);
+app.get('/documents/delete/', deleteDocument);
 
 app.listen(port, ()=>{
     console.log(`Server is running on http://localhost:${port}`);

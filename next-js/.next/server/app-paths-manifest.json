@@ -1,4 +1,5 @@
 {
   "/api/documents/route": "app/api/documents/route.js",
+  "/api/documents/delete/route": "app/api/documents/delete/route.js",
   "/[locale]/documents/page": "app/[locale]/documents/page.js"
 }
