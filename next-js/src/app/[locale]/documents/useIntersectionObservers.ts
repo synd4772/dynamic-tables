@@ -15,7 +15,6 @@ export const useIntersectionObservers = (rootRef: HTMLDivElement | null ) => {
         if (entries[0].isIntersecting) {
           documentEventEmitter.emit('topRefTriggered', true)
         }
-        console.log('entries', entries[0].isIntersecting,  entries[0].target)
 
       }, options);
   
@@ -23,7 +22,6 @@ export const useIntersectionObservers = (rootRef: HTMLDivElement | null ) => {
         if (entries[0].isIntersecting) {
           documentEventEmitter.emit('bottomRefTriggered', entries[0].isIntersecting)
         }
-        console.log('entries',  entries[0].isIntersecting,  entries[0].target)
       }, options)
     }
   }, [rootRef]);

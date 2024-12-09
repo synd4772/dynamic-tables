@@ -41,17 +41,14 @@ export const TableBody = ({ headers, bottomObserver, topObserver }: TableBodyPro
 
   useEffect(() => {
         rerenderCount.current += 1
-        console.log('indexStart', indexStart.current, rerenderCount)
         documentEventEmitter.emit('documentsRerendered', null)
         prevStartIndex.current = indexStart.current
         
         if (topObserver.current && topTrigger.current) {
           topObserver.current?.observe(topTrigger.current as Element)
-          console.log('subscibed topTrigger', topTrigger.current)
         }
         if (bottomObserver.current && bottomTrigger.current) {
           bottomObserver.current?.observe(bottomTrigger.current as Element)
-          console.log('subscibed bottomTrigger', bottomTrigger.current)
         }
   });
 

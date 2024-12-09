@@ -4,7 +4,6 @@ export function shiftCoordinates({
   shift
 }: ShiftCoordinatesProps): Coordinates {
   if (coordinates.start + shift < 0 ) {
-    console.log("third")
     return {
       start: 0,
       end: coordinates.end
@@ -12,13 +11,11 @@ export function shiftCoordinates({
   }
 
   if (coordinates.end + shift > maxEnd ) {
-    console.log("second")
     return {
       start: coordinates.start,
       end: maxEnd
     }
   }
-  console.log("first")
   return { 
     start: coordinates.start + shift,
     end: coordinates.end + shift

@@ -21,7 +21,6 @@ export class DataRequestHandler{
             }
         })
         const jsonData =await response.json();
-        console.log(jsonData, "aaaaaaaa")
         documentEventEmitter.emit("dataFetched", jsonData);
         return jsonData;
     }

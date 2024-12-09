@@ -26,12 +26,10 @@ export const useData = () => {
 
     const isRendering = useRef(false);
     const isFetching = useRef(false);
-    const isAllDataFetched = useRef(false)
     const dataAmount = useRef(-1)
 
     useEffect(()=>{
         documentEventEmitter.on("dataFetched", (jsonData)=>{
-            console.log(jsonData, 'hoow');
             dataAmount.current = (jsonData as Document[]).length;
             setDocuments(() => (jsonData as DefaultMessage).data as Document[]);
             isFetching.current = false;
@@ -41,21 +39,6 @@ export const useData = () => {
         }
     }, [])
 
-    // useEffect(()=>{
-    //     if(!isFetching.current){
-    //         isFetching.current = true
-    //         async function fetchData() {
-                
-    //             const response = await fetch(`/api/documents?key=${sorter.key}&isAscending=${sorter.isAscending}&start=${coordinates.start}&end=${coordinates.end}`, {cache:"no-cache"})
-    //             const jsonResponse = await response.json();
-    //             console.log(jsonResponse, "looooooool")
-    //             documentEventEmitter.emit("dataFetched", jsonResponse)
-    //         }
-    //         fetchData();
-    //     }
-    // }, [])
-
-
     useEffect(() => {
         if (documents) {
             documentEventEmitter.emit('documentsUpdated', {documents, indexStart: coordinates.start});
@@ -63,7 +46,6 @@ export const useData = () => {
     }, [documents]);
 
     useEffect(() => {
-        console.log("post", dataAmount.current)
         if(dataAmount.current != -1){
             const sortRequest: DataRequest = {
                 request: "fetchData",
@@ -88,24 +70,14 @@ export const useData = () => {
         });
 
         documentEventEmitter.on('bottomRefTriggered', () => {
-            console.log("bottom trigger")
-            
             if (!isRendering.current) {
-                console.log("coordinates is changing")
-                
-                setCoordinates((prev) => {
-                    console.log(prev, "previous")
-                    console.log(shiftCoordinates({ maxEnd: dataAmount.current, coordinates: prev, shift:  DOCUMENTS_RENDER_LIMIT  }))
-                    return shiftCoordinates({ maxEnd: dataAmount.current, coordinates: prev, shift:  DOCUMENTS_RENDER_LIMIT  })});
+                setCoordinates((prev) => shiftCoordinates({ maxEnd: dataAmount.current, coordinates: prev, shift:  DOCUMENTS_RENDER_LIMIT  }));
             }
         });
 
         documentEventEmitter.on('topRefTriggered', () => {
-            console.log("top trigger")
             if (!isRendering.current) {
-                console.log("coordinates is changing")
                 setCoordinates((prev) => shiftCoordinates({  maxEnd: dataAmount.current, coordinates: prev, shift:  -1 * DOCUMENTS_RENDER_LIMIT  }));
-                
             }
         });
 
@@ -121,7 +93,6 @@ export const useData = () => {
     }, []);
 
     useEffect(() => {
-        console.log("coordinates changed", coordinates.end, coordinates.start)
         isRendering.current = true;
         const request: DataRequest  = {
             request: "fetchData",

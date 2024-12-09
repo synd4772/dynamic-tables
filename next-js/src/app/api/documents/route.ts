@@ -13,10 +13,7 @@ export async function GET(request: NextRequest) {
     const end = searchParams.get("end");
 
 
-    console.log("SOMETHING IS HAPPENING", `http://localhost:3000/documents?key=${key}&isAscending=${isAscending}&start=${start}&end=${end}`)
     const response = await fetch(`http://localhost:3000/documents?key=${key}&isAscending=${isAscending}&start=${start}&end=${end}`);
-    
     const jsonResponse = await response.json();
-    console.log(jsonResponse, "ura")
     return NextResponse.json({data:jsonResponse})
 }
